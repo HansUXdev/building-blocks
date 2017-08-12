@@ -13,6 +13,23 @@ _gaq.push(
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+var _kmq = _kmq || [];
+!function() {
+
+var _kmq = _kmq || [];
+var _kmk = _kmk || "d945f04ff5e68057c85f5323b46f185efb3826b3";
+function _kms(u){
+  setTimeout(function(){
+    var d = document, f = d.getElementsByTagName('script')[0],
+    s = d.createElement('script');
+    s.type = 'text/javascript'; s.async = true; s.src = u;
+    f.parentNode.insertBefore(s, f);
+  }, 1);
+}
+_kms('//i.kissmetrics.com/i.js');
+_kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+
+}();
 
 var mySVGsToInject = document.querySelectorAll('img.inject-me');
 
@@ -56,11 +73,13 @@ if($searchInput.is('*')) {
   window.search = new Search({
     input: $('input[type="search"]'),
     searchContainer: $('#search-results-container .card-container'),
+    kitContainer: $('#search-results-container .kit-container'),
     initialQuery: params.q,
-    onSearch: function(term, filter, sort, results) {
+    onSearch: function(term, filter, sort, results, kitResults) {
       if(term.length > 0 || filter !== 'all' || sort !== 'newest') {
         $('#main-results-container').hide();
         $('#search-results-container').show();
+        $('#search-results-container').foundation();
         $('#result-count').text(results.length);
       } else {
         $('#main-results-container').show();
@@ -85,7 +104,7 @@ if($searchInput.is('*')) {
   });
 }
 
-function getParams() { 
+function getParams() {
   var search = location.search.substring(1);
   return search?JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',
                    function(key, value) { return key===""?value:decodeURIComponent(value) }):{}
@@ -140,3 +159,46 @@ toggleSCSS.click(function(e) {
   e.preventDefault();
 });
 
+var socialName = $('meta[name="og:title"]').prop('content');
+var socialImage = $('meta[name="og:image"]').prop('content');
+$('#bb-social').jsSocials({
+  showLabel: false,
+  showCount: false,
+  text: "Download this " + socialName + " from Foundation Building Blocks",
+  shares: [ { share: "twitter", via: "ZURBFoundation" }, "facebook", {share: "pinterest", media: socialImage, text: socialName + " from Foundation Building Blocks"}]
+});
+
+var setCalloutPosition = function(moveOver) {
+  localStorage.setItem('course-callout-shrunk', '' + moveOver);
+  $('.course-callout-alert').toggleClass('is-moved-over', moveOver);
+}
+
+$('[data-toggle-callout]').click(function() {
+  setCalloutPosition(!$('.course-callout-alert').hasClass('is-moved-over'));
+});
+
+if(localStorage.getItem('course-callout-shrunk') === 'true') {
+  $('.course-callout-alert').addClass('is-moved-over no-animate');
+  setTimeout(function() {
+    $('.course-callout-alert').removeClass('no-animate');
+  }, 1);
+}
+
+var $footer = $('#footer');
+var $window = $(window);
+var $callout = $('.course-callout-alert');
+
+if($callout.is('*')) {
+  $(window).on("load scroll", function() {
+      var footerOffset = $footer.offset().top;
+      var myScrollPosition = $(this).scrollTop();
+      var windowHeight = $window.height();
+      var footerHeight = $footer.outerHeight();
+
+      if ((myScrollPosition + windowHeight - footerHeight) > footerOffset) {
+        $callout.addClass('absolute');
+      } else {
+        $callout.removeClass('absolute');
+      }
+  });
+}

@@ -38,7 +38,6 @@ $nav-bg-color: lighten($nav-text-color, 30%);
 .responsive-nav-social {
   padding: $nav-padding;
   background-color: $nav-bg-color;
-  max-width: none !important;
 
    &.is-stuck {
     width: 100%;
@@ -55,7 +54,7 @@ $nav-bg-color: lighten($nav-text-color, 30%);
      }
   }
 
-  @media screen and (max-width: 39.9375em) {
+  @include breakpoint (small only) {
     .menu li a {
        font-size: 1.5rem;
        padding: 1.5rem;
