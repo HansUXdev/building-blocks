@@ -1,4 +1,12 @@
+////
+/// @group Marketing
+////
+
+/// Footer Background
 $marketing-site-footer-bg: #2c3840;
+/// Footer font color
+$marketing-site-font-color: $white;
+
 
 .marketing-site-footer {
   background: $marketing-site-footer-bg;
@@ -6,7 +14,7 @@ $marketing-site-footer-bg: #2c3840;
   padding: 2rem 0 0;
 
   .marketing-site-footer-menu-social a {
-    color: $white;
+    color: $marketing-site-font-color;
   }
 
   .column-block {
@@ -25,13 +33,13 @@ $marketing-site-footer-bg: #2c3840;
 }
 
 .marketing-site-footer-name {
-  color: $white;
+  color: $marketing-site-font-color;
   margin-bottom: 1rem;
   font-size: 2rem;
 }
 
 .marketing-site-footer-title {
-  color: $white;
+  color: $marketing-site-font-color;
   margin-bottom: 1rem;
   font-size: 1.25rem;
 }

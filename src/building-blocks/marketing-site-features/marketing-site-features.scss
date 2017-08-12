@@ -1,3 +1,14 @@
+////
+/// @group Marketing
+////
+
+/// Icon color
+$marketing-site-features-icon-color: $primary-color;
+/// Feature headline font-size
+$marketing-site-features-headline: 24px;
+/// Feature title font-size
+$marketing-site-features-title: 1.125rem;
+
 .marketing-site-features {
   text-align: center;
   padding: 2rem 0;
@@ -5,11 +16,11 @@
   .fa {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: $primary-color;
+    color: $marketing-site-features-icon-color;
   }
 
   .marketing-site-features-title {
-    font-size: 1.125rem;
+    font-size: $marketing-site-features-title;
     margin-bottom: 1rem;
   }
 
@@ -20,7 +31,7 @@
 
 .marketing-site-features-headline {
   text-align: center;
-  font-size: 24px;
+  font-size: $marketing-site-features-headline;
 }
 
 .marketing-site-features-subheadline {
